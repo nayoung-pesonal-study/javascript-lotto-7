@@ -22,6 +22,16 @@ class Parser {
     Validator.checkFiveLength(parsedInputNumberArray);
     return parsedInputNumberArray;
   }
+
+  static inputBonusNumber(input) {
+    Validator.checkIsEmpty(input);
+    const parsedInputNumber = Number(input);
+    Validator.checkIsNumber(parsedInputNumber);
+    Validator.checkNaturalNumber(parsedInputNumber);
+    Validator.checkLottoRange(parsedInputNumber);
+
+    return parsedInputNumber;
+  }
 }
 
 export default Parser;

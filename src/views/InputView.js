@@ -29,6 +29,20 @@ class InputView {
       return await this.inputWinnerNumbers();
     }
   }
+
+  static async inputBonusNumbers(inputWinnerNumbers) {
+    try {
+      const inputBonusNumber = await MissionUtils.Console.readLineAsync(
+        MESSAGE.INFO.BONUS_NUMBER
+      );
+      const parsedInputBonusNumber = Parser.inputBonusNumber(inputBonusNumber);
+      Validator.checkSameNumber(parsedInputBonusNumber, inputWinnerNumbers);
+      return parsedInputBonusNumber;
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      return await this.inputBonusNumbers(inputWinnerNumbers);
+    }
+  }
 }
 
 export default InputView;
