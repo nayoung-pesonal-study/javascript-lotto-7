@@ -16,6 +16,19 @@ class InputView {
       return await this.inputPrice();
     }
   }
+
+  static async inputWinnerNumbers() {
+    try {
+      const inputWinnerNumbers = await MissionUtils.Console.readLineAsync(
+        MESSAGE.INFO.WINNER_NUMBERS
+      );
+      const parsedInputArray = Parser.inputWinnerNumbers(inputWinnerNumbers);
+      return parsedInputArray;
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      return await this.inputWinnerNumbers();
+    }
+  }
 }
 
 export default InputView;

@@ -1,13 +1,26 @@
 import Validator from "./Validator.js";
 
 class Parser {
-  static inputPriceToNumber(inputPrice) {
-    Validator.checkIsEmpty(inputPrice);
-    const parsedInputPrice = Number(inputPrice);
-    Validator.checkIsNumber(parsedInputPrice);
-    Validator.checkThousandMultiple(parsedInputPrice);
-    Validator.checkNaturalNumber(parsedInputPrice);
-    return parsedInputPrice;
+  static inputPriceToNumber(input) {
+    Validator.checkIsEmpty(input);
+    const parsedInputNumber = Number(input);
+    Validator.checkIsNumber(parsedInputNumber);
+    Validator.checkThousandMultiple(parsedInputNumber);
+    Validator.checkNaturalNumber(parsedInputNumber);
+    return parsedInputNumber;
+  }
+
+  static inputWinnerNumbers(input) {
+    Validator.checkIsEmpty(input);
+    const parsedInputArray = input.split(",");
+    const parsedInputNumberArray = parsedInputArray.map((cur) => {
+      const inputCheck = Number(cur.trim());
+      Validator.checkNaturalNumber(inputCheck);
+      Validator.checkLottoRange(inputCheck);
+      return inputCheck;
+    });
+    Validator.checkFiveLength(parsedInputNumberArray);
+    return parsedInputNumberArray;
   }
 }
 
