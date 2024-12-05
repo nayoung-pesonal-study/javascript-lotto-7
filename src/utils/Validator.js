@@ -47,6 +47,13 @@ class Validator {
       throw new Error("[ERROR] 보너스 번호와 당첨 번호에 중복이 있습니다.");
     }
   }
+
+  static checkSameNumberInArray(inputArray) {
+    const inputArrayCopy = [...new Set([...inputArray])];
+    if (inputArray.length !== inputArrayCopy.length) {
+      throw new Error("[ERROR] 생성된 번호에 중복이 있습니다.");
+    }
+  }
 }
 
 export default Validator;

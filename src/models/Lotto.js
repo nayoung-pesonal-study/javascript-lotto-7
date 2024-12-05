@@ -1,18 +1,30 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+import Validator from "../utils/Validator.js";
+
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
+  constructor(numbers = this.generateRandomNumber()) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validator.checkFiveLength(numbers);
+    Validator.checkSameNumberInArray(numbers);
+    numbers.forEach((cur) => {
+      Validator.checkNaturalNumber(cur);
+      Validator.checkLottoRange(cur);
+    });
   }
 
-  // TODO: 추가 기능 구현
+  generateRandomNumber() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  copyNumbers() {
+    return [...this.#numbers];
+  }
 }
 
 export default Lotto;
